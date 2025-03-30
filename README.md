@@ -16,6 +16,7 @@ You proposed three paths:
    - It is unclear whether the company's working style is reflected in the file/folder structure, the coding approach, or the methodology to be used. I believe this influences more than one might realize, which clashes with someone coming from outside.  
    - Additionally, adapting to a way of coding that may be different from what you're used to is always complex and can lead to errors and frustration.  
    - You might also encounter parts that are deliberately implemented incorrectly or in an unconventional way so they can be corrected. But, as there is always doubt, this can be a conflicting point.
+   - Furthermore, could be that the code provided is intentionally incorrect to see how the candidate reacts... or not. For this reason I decided to start from scratch.
 
 2. **Focus on the “kitchen” context**  
    I might have chosen the second option since I focused heavily on the kitchen context. However, I also created additional content that I later did not use, but which hints at how each element would be separated.  
