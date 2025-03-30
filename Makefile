@@ -56,7 +56,10 @@ install-components:
 	U_ID=${UID} docker compose exec $(DOCKER_BE) symfony console doctrine:migrations:migrate --no-interaction
 	U_ID=${UID} docker compose exec $(DOCKER_BE) symfony console doctrine:fixtures:load --no-interaction
 
-symfony-prepare:
+composer-install:
+	U_ID=${UID} docker compose exec $(DOCKER_BE) composer install
+
+composer-update:
 	U_ID=${UID} docker compose exec $(DOCKER_BE) composer update
 
 symfony-install: ## install symfony
