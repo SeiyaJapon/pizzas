@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                  http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="App\ContextBundle\Domain\Kitchen\Pizza" table="pizzas">
+        <id name="id" type="string" column="id">
+            <generator strategy="NONE"/>
+        </id>
+
+        <field name="name" type="string" column="name" length="255" nullable="false"/>
+        <field name="ingredients" type="json" column="ingredients" nullable="false"/>
+        <field name="status" type="string" column="status" length="50" nullable="false"/>
+    </entity>
+
+</doctrine-mapping> 

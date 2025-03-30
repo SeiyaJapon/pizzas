@@ -1,0 +1,50 @@
+order_pizza:
+    path: /order-pizza
+    controller: App\ContextBundle\Infrastructure\Kitchen\Http\OrderPizzaController
+    methods: [POST]
+
+create_pizza:
+    path: /create-pizza
+    controller: App\ContextBundle\Infrastructure\Kitchen\Http\CreatePizzaController
+    methods: [POST]
+
+get_pizza:
+    path: /pizza/{id}
+    controller: App\ContextBundle\Infrastructure\Kitchen\Http\GetPizzaController
+    methods: [GET]
+
+get_all_pizzas:
+    path: /pizzas
+    controller: App\ContextBundle\Infrastructure\Kitchen\Http\GetAllPizzasController
+    methods: [GET]
+
+add_ingredient:
+    path: /add-ingredient
+    controller: App\ContextBundle\Infrastructure\Kitchen\Http\AddIngredientController
+    methods: [POST]
+
+get_ingredient:
+    path: /ingredient/{id}
+    controller: App\ContextBundle\Infrastructure\Kitchen\Http\GetIngredientController
+    methods: [GET]
+
+get_all_ingredients:
+    path: /ingredients
+    controller: App\ContextBundle\Infrastructure\Kitchen\Http\GetAllIngredientsController
+    methods: [GET]
+
+create_recipe:
+    path: /create-recipe
+    controller: App\ContextBundle\Infrastructure\Kitchen\Http\CreateRecipeController
+    methods: [POST]
+
+get_recipe:
+    path: /recipe/{id}
+    controller: App\ContextBundle\Infrastructure\Kitchen\Http\GetRecipeController
+    methods: [GET]
+
+get_all_recipes:
+    path: /recipes
+    controller: App\ContextBundle\Infrastructure\Kitchen\Http\GetAllRecipesController
+    methods: [GET]
+

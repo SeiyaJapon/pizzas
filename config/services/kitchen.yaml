@@ -1,0 +1,14 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    App\Domain\Kitchen\:
+        resource: '../src/Domain/Kitchen/*'
+        exclude: '../src/Domain/Kitchen/{Model}'
+
+    App\Domain\Kitchen\Repository\PizzaRepository:
+        class: App\Domain\Kitchen\Repository\DoctrinePizzaRepository
+
+    App\Domain\Kitchen\Command\CreatePizzaCommand:
+        tags: ['command_handler']

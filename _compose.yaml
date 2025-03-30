@@ -1,0 +1,56 @@
+version: '3'
+
+services:
+  database:
+    container_name: database
+    image: postgres:${POSTGRES_VERSION:-15}-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: app
+      POSTGRES_PASSWORD: 123123
+      POSTGRES_USER: app
+    volumes:
+      - database_data:/var/lib/postgresql/data:rw
+    networks:
+      - app-network
+
+  php:
+    container_name: php-backend
+    build:
+      context: ./docker/php
+      args:
+        user: appuser
+        UID: 1000
+    environment:
+      PHP_IDE_CONFIG: serverName=Docker
+      PHP_XDEBUG_ENABLED: 1
+      XDEBUG_CONFIG: remote_host=host.docker.internal remote_port=9003 XDEBUG_CLIENT_HOST=host.docker.internal XDEBUG_CLIENT_PORT=9003
+    volumes:
+      - ./:/var/www
+      - ./docker/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+      - ~/.ssh/id_rsa:/home/appuser/.ssh/litemp
+    networks:
+      - app-network
+    depends_on:
+      - database
+
+  nginx:
+    container_name: webserver
+    build:
+      context: ./docker/nginx
+      args:
+        user: appuser
+        UID: 1000
+    ports:
+      - 80:80
+    volumes:
+      - ./:/var/www
+    depends_on:
+      - php
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    external: true

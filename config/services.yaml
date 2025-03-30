@@ -1,0 +1,71 @@
+# config/services.yaml
+
+parameters:
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+
+    App\ContextBundle\Infrastructure\Kitchen\Repository\RecipeRepository:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    App\ContextBundle\Domain\Kitchen\Repository\RecipeRepositoryInterface:
+        alias: App\ContextBundle\Infrastructure\Kitchen\Repository\RecipeRepository
+
+    App\SharedContext\Infrastructure\CommandBus\TacticianCommandBus:
+        autowire: true
+        autoconfigure: true
+
+    App\SharedContext\Infrastructure\QueryBus\TacticianQueryBus:
+        autowire: true
+        autoconfigure: true
+
+    Symfony\Component\EventDispatcher\EventDispatcher:
+        autowire: true
+        autoconfigure: true
+
+    App\SharedContext\Infrastructure\Events\EventBus:
+        autowire: true
+        autoconfigure: true
+
+    App\SharedContext\Domain\Event\DomainEventInterface:
+        class: App\SharedContext\Infrastructure\Events\EventBus
+
+    # Registro automático de handlers para Tactician
+    App\ContextBundle\Application\Kitchen\Command\:
+        resource: '../src/ContextBundle/Application/Kitchen/Command/'
+        tags: ['tactician.handler']
+
+    App\ContextBundle\Application\Kitchen\Command\AddIngredient\AddIngredientCommand:
+        arguments:
+            $name: 'default_name_value'
+
+    App\ContextBundle\Application\Kitchen\Command\CreatePizza\CreatePizzaCommand:
+        arguments:
+            $id: 'default_id_value'
+
+    App\ContextBundle\Application\Kitchen\Command\CreateRecipe\CreateRecipeCommand:
+        arguments:
+            $name: 'default_name_value'
+
+    App\ContextBundle\Application\Kitchen\Command\OrderPizza\OrderPizzaCommand:
+        arguments:
+            $pizzaId: 'default_pizza_id_value'
+
+    App\ContextBundle\Application\Kitchen\Command\OrderPizza\OrderPizzaCommandHandler:
+        tags:
+            - { name: tactician.handler, command: App\ContextBundle\Application\Kitchen\Command\OrderPizza\OrderPizzaCommand }
+
+    App\ContextBundle\Application\Kitchen\Command\CreatePizza\CreatePizzaCommandHandler:
+        tags:
+            - { name: tactician.handler, command: App\ContextBundle\Application\Kitchen\Command\CreatePizza\CreatePizzaCommand }
